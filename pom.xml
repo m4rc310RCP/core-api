@@ -1,0 +1,182 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.com.m4rc310.core</groupId>
+	<artifactId>core-api</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>${project.artifactId}</name>
+	<description>Core</description>
+
+	<developers>
+		<developer>
+			<id>m4rc310</id>
+			<name>Marcelo Lopes</name>
+			<email>marcelo.utfpr@me.com</email>
+			<organization>M4RC310</organization>
+			<organizationUrl>https://dev.m4r310.com.br</organizationUrl>
+		</developer>
+	</developers>
+
+	<properties>
+		<maven-compiler-plugin-artifactId>maven-compiler-plugin</maven-compiler-plugin-artifactId>
+		<lifecycle-mapping-artifactId>lifecycle-mapping</lifecycle-mapping-artifactId>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.target>22</maven.compiler.target>
+		<maven.compiler.source>22</maven.compiler.source>
+		<java.version>22</java.version>
+		<spqr.version>0.12.4</spqr.version>
+<!--		<spring-boot.version>3.1.12</spring-boot.version>-->
+		<spring-boot.version>3.4.2</spring-boot.version>
+		<fastjson.version>1.2.24</fastjson.version>
+		<spqr.utils.version>0.0.7</spqr.utils.version>
+		<revision>0.0.0-SNAPSHOT</revision>
+	</properties>
+
+	<licenses>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>
+			scm:git:git@github.com:m4rc310RCP/api-open.git</connection>
+		<developerConnection>
+			scm:git:ssh://git@github.com:m4rc310RCP/api-open.git</developerConnection>
+		<url>https://github.com/m4rc310RCP/api-open</url>
+		<tag>HEAD</tag>
+	</scm>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>br.com.m4rc310.core</groupId>
+				<artifactId>br-com-m4rc310-core-libs</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.com.m4rc310.core</groupId>
+				<artifactId>br-com-m4rc310-core-starter</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>br.com.m4rc310.core</groupId>
+				<artifactId>br-com-m4rc310-core-graphql</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>
+				https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+
+
+	</distributionManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<compilerArgs>
+						<arg>-parameters</arg>
+					</compilerArgs>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<extensions>true</extensions>
+				<version>1.6.13</version>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.2.1</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.3.2</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+
+						<configuration>
+							<gpgArguments>
+								<arg>--batch</arg>
+								<arg>--no-tty</arg>
+							</gpgArguments>
+							<keyname>${gpg.keyname}</keyname>
+							<passphraseServerId>${gpg.keyname}</passphraseServerId>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<modules>
+		<module>br-com-m4rc310-core-libs</module>
+		<module>br-com-m4rc310-core-starter</module>
+		<module>br-com-m4rc310-core-graphql</module>
+	</modules>
+
+</project>

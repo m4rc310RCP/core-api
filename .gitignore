@@ -1,0 +1,105 @@
+# Ignore arquivos de build do Maven e Gradle
+target/
+!target/*.jar
+!target/*.war
+!target/*.ear
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# Visual Studio Code
+.vscode/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Logs e dumps
+*.log
+*.log.*
+hs_err_pid*
+
+# Arquivos de configuração e credenciais
+.env
+*.env
+*.properties
+*.yml
+*.yaml
+secrets/
+application-*.properties
+application-*.yml
+
+# Arquivos de cache e temporários
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.gz
+
+# Arquivos do Maven
+.mvn/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml*.backup
+dependency-reduced-pom.xml
+buildNumber.properties
+
+# Arquivos do Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Test outputs
+test-output/
+
+# Arquivos específicos de IDEs e ferramentas de build
+*.swp
+*.bak
+*.tmp
+
+# Arquivos de cobertura de testes
+*.coverage
+.coverage/
+
+# Arquivos de relatórios
+*.out
+*.report
+
+# Logs de containers e Docker
+docker-compose.override.yml
+*.db
+*.pid
+*.seed
+*.backup
+
+# Arquivos do Sonar e análise de qualidade
+.sonar/
+.idea/
+
+# Arquivos de cache do GraphQL (caso use)
+.graphqlconfig/
+graphql-schema.json
+
+# Arquivos de deploy locais
+*.crt
+*.key
+*.pem
+
+# Ignore NGINX e configurações de proxy (caso use)
+nginx.conf
+proxy.conf
+
+# Arquivos de scripts ou deploy
+deploy/
+scripts/
