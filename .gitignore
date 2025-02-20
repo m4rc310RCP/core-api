@@ -31,8 +31,6 @@ hs_err_pid*
 # Arquivos de configuração e credenciais
 .env
 *.env
-*.properties
-*.yml
 *.yaml
 secrets/
 application-*.properties
