@@ -8,6 +8,8 @@
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
 	<description>Core</description>
+	
+	<url>https://github.com/m4rc310RCP/core-api</url>
 
 	<developers>
 		<developer>
