@@ -15,7 +15,7 @@ public class MPhysicalNamingImpl extends PhysicalNamingStrategyStandardImpl {
 
 	
 	/**
-	 * 
+	 * <p>Constructor for .</p>
 	 */
 	public MPhysicalNamingImpl() {
 	}

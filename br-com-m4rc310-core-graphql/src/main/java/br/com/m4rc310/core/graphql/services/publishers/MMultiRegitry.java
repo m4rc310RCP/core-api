@@ -23,7 +23,7 @@ public class MMultiRegitry<K, T>  {
 	
 	
 	/**
-	 * 
+	 * <p>Constructor for MMultiRegistry.</p>
 	 */
 	public MMultiRegitry(){}
 

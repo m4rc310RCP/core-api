@@ -32,7 +32,7 @@ public class MAuthInterceptor implements ResolverInterceptor {
 	
 	
 	/**
-	 * 
+	 * MAuthInterceptor
 	 */
 	public MAuthInterceptor() {
 	}

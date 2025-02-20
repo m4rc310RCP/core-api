@@ -32,7 +32,7 @@ public class MGraphQLOncePerRequestFilter extends OncePerRequestFilter {
 	private IMGraphQLJwtService jwt;
 	
 	/**
-	 * 
+	 * <p>Constructor for .</p>
 	 */
 	public MGraphQLOncePerRequestFilter() {
 

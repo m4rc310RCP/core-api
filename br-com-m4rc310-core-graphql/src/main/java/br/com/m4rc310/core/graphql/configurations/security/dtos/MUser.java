@@ -45,7 +45,7 @@ public class MUser  implements UserDetails{
 	private boolean enabled;
 	
 	/**
-	 * 
+	 * <p>Constructor for MUser.</p>
 	 */
 	public MUser() {}
 	

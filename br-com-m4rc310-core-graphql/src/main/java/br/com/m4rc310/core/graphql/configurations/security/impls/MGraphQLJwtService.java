@@ -51,7 +51,7 @@ public class MGraphQLJwtService implements IMGraphQLJwtService {
 	private int JWT_KEY_LENGTH;
 	
 	/**
-	 * 
+	 * <p>Constructor for .</p>
 	 */
 	public MGraphQLJwtService (){}
 	

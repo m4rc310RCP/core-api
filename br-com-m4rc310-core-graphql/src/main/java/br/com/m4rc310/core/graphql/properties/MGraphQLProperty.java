@@ -22,7 +22,7 @@ public class MGraphQLProperty implements IConsts{
 	private Ws ws = new Ws();
 	
 	/**
-	 * 
+	 * <p>Constructor for .</p>
 	 */
 	public MGraphQLProperty(){}
 	

@@ -32,7 +32,7 @@ public class MFluxService implements IMFluxService {
 
 	
 	/**
-	 * 
+	 * <p>Constructor for MFluxService.</p>
 	 */
 	public MFluxService() {
 	}

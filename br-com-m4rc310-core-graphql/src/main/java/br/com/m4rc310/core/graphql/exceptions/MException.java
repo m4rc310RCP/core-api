@@ -24,7 +24,7 @@ public class MException extends Exception {
 	private String message;
 	
 	/**
-	 * 
+	 * <p>Constructor for MException.</p>
 	 */
 	public MException() {
 	}

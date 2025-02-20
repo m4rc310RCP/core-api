@@ -41,7 +41,7 @@ public class MGraphQLSecurityConfig implements IConsts {
 	
 	
 	/**
-	 * 
+	 * MGraphQLAutoConfiguration
 	 */
 	public MGraphQLSecurityConfig() {
 	}
