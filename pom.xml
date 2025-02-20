@@ -2,7 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>br.com.m4rc310.core</groupId>
+	<groupId>br.com.m4rc310</groupId>
 	<artifactId>core-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
@@ -29,7 +29,6 @@
 		<maven.compiler.source>22</maven.compiler.source>
 		<java.version>22</java.version>
 		<spqr.version>0.12.4</spqr.version>
-		<!--		<spring-boot.version>3.1.12</spring-boot.version>-->
 		<spring-boot.version>3.4.2</spring-boot.version>
 		<fastjson.version>1.2.24</fastjson.version>
 		<spqr.utils.version>0.0.7</spqr.utils.version>
@@ -64,19 +63,19 @@
 			</dependency>
 
 			<dependency>
-				<groupId>br.com.m4rc310.core</groupId>
+				<groupId>br.com.m4rc310</groupId>
 				<artifactId>br-com-m4rc310-core-libs</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
-				<groupId>br.com.m4rc310.core</groupId>
+				<groupId>br.com.m4rc310</groupId>
 				<artifactId>br-com-m4rc310-core-starter</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
-				<groupId>br.com.m4rc310.core</groupId>
+				<groupId>br.com.m4rc310</groupId>
 				<artifactId>br-com-m4rc310-core-graphql</artifactId>
 				<version>${project.version}</version>
 			</dependency>

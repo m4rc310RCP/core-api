@@ -8,7 +8,7 @@
 	<name>${project.artifactId}</name>
 
 	<parent>
-		<groupId>br.com.m4rc310.core</groupId>
+		<groupId>br.com.m4rc310</groupId>
 		<artifactId>core-api</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
