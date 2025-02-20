@@ -19,13 +19,27 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MGraphQLOncePerRequestFilter.
+ */
 @Slf4j
 @Configuration
 public class MGraphQLOncePerRequestFilter extends OncePerRequestFilter {
 	
+	/** The jwt. */
 	@Autowired
 	private IMGraphQLJwtService jwt;
 
+	/**
+	 * Do filter internal.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @param filterChain the filter chain
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {

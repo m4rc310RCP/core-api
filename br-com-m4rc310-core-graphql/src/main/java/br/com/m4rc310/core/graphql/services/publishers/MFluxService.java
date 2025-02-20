@@ -14,12 +14,20 @@ import br.com.m4rc310.core.graphql.configurations.security.dtos.MUser;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MFluxService.
+ */
 @Configuration
 public class MFluxService implements IMFluxService {
+	
+	/** The registry. */
 	protected final MMultiRegitry<String, Object> registry = new MMultiRegitry<>();
 
+	/** The user. */
 	private MUser user;
 
+	/** The ip client. */
 	private String ipClient;
 
 	/**
@@ -40,10 +48,10 @@ public class MFluxService implements IMFluxService {
 	 * publish.
 	 * </p>
 	 *
+	 * @param <T>          a T class
 	 * @param type         a {@link java.lang.Class} object
 	 * @param key          a {@link java.lang.Object} object
 	 * @param defaultValue a T object
-	 * @param <T>          a T class
 	 * @return a {@link org.reactivestreams.Publisher} object
 	 */
 	@Override
@@ -76,10 +84,10 @@ public class MFluxService implements IMFluxService {
 	 * publishList.
 	 * </p>
 	 *
+	 * @param <T>          a T class
 	 * @param type         a {@link java.lang.Class} object
 	 * @param key          a {@link java.lang.Object} object
 	 * @param defaultValue a {@link java.util.List} object
-	 * @param <T>          a T class
 	 * @return a {@link reactor.core.publisher.Flux} object
 	 */
 	@Override
@@ -111,7 +119,7 @@ public class MFluxService implements IMFluxService {
 	 * @param <T>   the generic type
 	 * @param key   the key
 	 * @param value the value
-	 * @throws java.lang.Exception the exception
+	 * @throws Exception the exception
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -140,8 +148,9 @@ public class MFluxService implements IMFluxService {
 	 * Call publish from type.
 	 *
 	 * @param <T>   the generic type
+	 * @param type the type
 	 * @param value the value
-	 * @throws java.lang.Exception the exception
+	 * @throws Exception the exception
 	 */
 	@Override
 	public <T> void callPublish(Class<T> type, T value) throws Exception {
@@ -159,6 +168,12 @@ public class MFluxService implements IMFluxService {
 
 	}
 
+	/**
+	 * Gets the keys.
+	 *
+	 * @param type the type
+	 * @return the keys
+	 */
 	@Override
 	public List<String> getKeys(Class<?> type) {
 		return registry.getKeys(type);
@@ -184,7 +199,7 @@ public class MFluxService implements IMFluxService {
 	 * @param type  the type
 	 * @param key   the key
 	 * @param value the value
-	 * @throws java.lang.Exception the exception
+	 * @throws Exception the exception
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -202,10 +217,10 @@ public class MFluxService implements IMFluxService {
 	 * callListPublish.
 	 * </p>
 	 *
+	 * @param <T>  a T class
 	 * @param type a {@link java.lang.Class} object
 	 * @param key  a {@link java.lang.Object} object
 	 * @param list a {@link java.util.List} object
-	 * @param <T>  a T class
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -220,6 +235,8 @@ public class MFluxService implements IMFluxService {
 	/**
 	 * Authenticated user.
 	 *
+	 * @param type the type
+	 * @param key the key
 	 * @return the m user
 	 */
 //	public MUser authenticatedUser() {
@@ -320,21 +337,41 @@ public class MFluxService implements IMFluxService {
 		return fields;
 	}
 
+	/**
+	 * Sets the user.
+	 *
+	 * @param user the new user
+	 */
 	@Override
 	public void setUser(MUser user) {
 		this.user = user;
 	}
 
+	/**
+	 * Gets the user.
+	 *
+	 * @return the user
+	 */
 	@Override
 	public MUser getUser() {
 		return user;
 	}
 
+	/**
+	 * Sets the IP client.
+	 *
+	 * @param ipClient the new IP client
+	 */
 	@Override
 	public void setIPClient(String ipClient) {
 		this.ipClient = ipClient;
 	}
 
+	/**
+	 * Gets the IP client.
+	 *
+	 * @return the IP client
+	 */
 	@Override
 	public String getIPClient() {
 		return ipClient;

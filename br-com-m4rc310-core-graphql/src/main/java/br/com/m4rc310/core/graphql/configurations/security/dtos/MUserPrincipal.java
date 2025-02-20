@@ -10,12 +10,23 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import lombok.Data;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MUserPrincipal.
+ */
 @Data
 public class MUserPrincipal implements Serializable{
+
+/** The Constant serialVersionUID. */
 private static final long serialVersionUID = 4607336427719715274L;
 	
+	/** The username. */
 	private String username;
+    
+    /** The password. */
     private String password;
+    
+    /** The authorities. */
     private Collection<? extends GrantedAuthority> authorities;
 	
 	/**

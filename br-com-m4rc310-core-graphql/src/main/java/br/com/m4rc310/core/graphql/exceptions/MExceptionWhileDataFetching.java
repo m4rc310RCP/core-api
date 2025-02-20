@@ -14,13 +14,28 @@ import graphql.GraphqlErrorHelper;
 import graphql.execution.ResultPath;
 import graphql.language.SourceLocation;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MExceptionWhileDataFetching.
+ */
 public class MExceptionWhileDataFetching implements GraphQLError {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 3489316369045027073L;
+	
+	/** The message. */
 	private final String message;
+    
+    /** The path. */
     private final List<Object> path;
+    
+    /** The exception. */
     private final Throwable exception;
+    
+    /** The locations. */
     private final List<SourceLocation> locations;
+    
+    /** The extensions. */
     private final Map<String, Object> extensions;
 
     /**
@@ -38,11 +53,24 @@ public class MExceptionWhileDataFetching implements GraphQLError {
         this.message = mkMessage(path, exception);
     }
 
+    /**
+     * Mk message.
+     *
+     * @param path the path
+     * @param exception the exception
+     * @return the string
+     */
     private String mkMessage(ResultPath path, Throwable exception) {
 //        return format("Exception while fetching data (%s) : %s", path, exception.getMessage());
         return format("%s", exception.getMessage());
     }
 
+    /**
+     * Mk extensions.
+     *
+     * @param exception the exception
+     * @return the map
+     */
     /*
      * This allows a DataFetcher to throw a graphql error and have "extension data" be transferred from that
      * exception into the ExceptionWhileDataFetching error and hence have custom "extension attributes"

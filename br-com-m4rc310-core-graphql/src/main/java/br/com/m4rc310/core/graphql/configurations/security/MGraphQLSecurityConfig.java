@@ -18,31 +18,53 @@ import br.com.m4rc310.core.graphql.properties.IConsts;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MGraphQLSecurityConfig.
+ */
 @Slf4j
 @Configuration
 @EnableWebSecurity
 public class MGraphQLSecurityConfig implements IConsts {
 	
+	/** The is dev. */
 	@Value(VALUE_IS_DEV)
 	private boolean isDev;
 	
+	/** The gui endpoint. */
 	@Value(VALUE_GRAPHQL_GUI_ENDPOINT)
 	private String GUI_ENDPOINT;
 	
+	/** The server endpoint. */
 	@Value(VALUE_GRAPHQL_SERVER_ENDPOINT)
 	private String SERVER_ENDPOINT;
 	
+	/**
+	 * Inits the.
+	 */
 	@PostConstruct
 	void init() {
 		log.info("~> MGraphQLSecurityConfig in DEV: {}", isDev);
 	}
 
+	/**
+	 * User details service.
+	 *
+	 * @return the user details service
+	 */
 	@Bean
 	@ConditionalOnProperty(name = ENABLE_GRAPHQL_SECURITY, havingValue = "false", matchIfMissing = true)
 	UserDetailsService userDetailsService() {
 		return username -> null;
 	}
 
+	/**
+	 * Security filter chain disbled security.
+	 *
+	 * @param http the http
+	 * @return the security filter chain
+	 * @throws Exception the exception
+	 */
 	@Bean
 	@ConditionalOnProperty(name = ENABLE_GRAPHQL_SECURITY, havingValue = "false", matchIfMissing = true)
 	SecurityFilterChain securityFilterChainDisbledSecurity(HttpSecurity http) throws Exception {
@@ -55,6 +77,14 @@ public class MGraphQLSecurityConfig implements IConsts {
 		return http.build();
 	}
 	
+	/**
+	 * Security filter chain from graph QL.
+	 *
+	 * @param http the http
+	 * @param filter the filter
+	 * @return the security filter chain
+	 * @throws Exception the exception
+	 */
 	@Bean
 	@ConditionalOnProperty(name = ENABLE_GRAPHQL_SECURITY, havingValue = "true", matchIfMissing = false)
 	SecurityFilterChain securityFilterChainFromGraphQL(HttpSecurity http, MGraphQLOncePerRequestFilter filter) throws Exception {

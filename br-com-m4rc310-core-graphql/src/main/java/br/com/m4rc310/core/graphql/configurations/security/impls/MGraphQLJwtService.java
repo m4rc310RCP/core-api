@@ -22,26 +22,41 @@ import io.jsonwebtoken.Jwts;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MGraphQLJwtService.
+ */
 @Slf4j
 @Configuration
 public class MGraphQLJwtService implements IMGraphQLJwtService {
 	
+	/** The provider. */
 	@Autowired
 	private IMAuthUserProvider provider;
 	
+	/** The jwt signing key. */
 	@Value(AUTH_SECURITY_SIGNING)
 	private String JWT_SIGNING_KEY;
 	
+	/** The jwt salt. */
 	@Value(AUTH_SECURITY_SALT)
 	private String JWT_SALT;
 	
+	/** The jwt iteration. */
 	@Value(AUTH_SECURITY_ITERATION)
 	private int JWT_ITERATION;
 	
+	/** The jwt key length. */
 	@Value(AUTH_SECURITY_KEY_LENGTH)
 	private int JWT_KEY_LENGTH;
 	
 
+	/**
+	 * Gets the DTO user.
+	 *
+	 * @param request the request
+	 * @return the DTO user
+	 */
 	@Override
 	public MUser getDTOUser(HttpServletRequest request) {
 		try {
@@ -54,6 +69,12 @@ public class MGraphQLJwtService implements IMGraphQLJwtService {
 
 	}
 
+	/**
+	 * Gets the token.
+	 *
+	 * @param request the request
+	 * @return the token
+	 */
 	private String getToken(HttpServletRequest request) {
 		MEnumToken type = getMEnumToken(request);
 		if (type.compareTo(MEnumToken.NONE) == 0) {
@@ -64,6 +85,12 @@ public class MGraphQLJwtService implements IMGraphQLJwtService {
 
 	}
 
+	/**
+	 * Gets the m enum token.
+	 *
+	 * @param request the request
+	 * @return the m enum token
+	 */
 	private MEnumToken getMEnumToken(HttpServletRequest request) {
 
 		String authorizationHeader = request.getHeader(AUTHORIZATION);
@@ -83,6 +110,14 @@ public class MGraphQLJwtService implements IMGraphQLJwtService {
 		return MEnumToken.NONE;
 	}
 
+	/**
+	 * Gets the m user.
+	 *
+	 * @param type the type
+	 * @param token the token
+	 * @return the m user
+	 * @throws Exception the exception
+	 */
 	@Override
 	public MUser getMUser(MEnumToken type, String token) throws Exception {
 		switch (type) {
@@ -109,11 +144,26 @@ public class MGraphQLJwtService implements IMGraphQLJwtService {
 		}
 	}
 	
+	/**
+	 * Encrypt.
+	 *
+	 * @param text the text
+	 * @return the string
+	 * @throws Exception the exception
+	 */
 	@Override
 	public String encrypt(String text) throws Exception {
 		return encrypt(text, JWT_SIGNING_KEY);
 	}
 
+	/**
+	 * Encrypt.
+	 *
+	 * @param text the text
+	 * @param key the key
+	 * @return the string
+	 * @throws Exception the exception
+	 */
 	@Override
 	public String encrypt(String text, String key) throws Exception {
 		byte[] keyByte = getKeyByte(key);
@@ -123,22 +173,49 @@ public class MGraphQLJwtService implements IMGraphQLJwtService {
 		return Base64.getEncoder().encodeToString(cipher.doFinal(text.getBytes()));
 	}
 
+	/**
+	 * Decrypt.
+	 *
+	 * @param text the text
+	 * @return the string
+	 * @throws Exception the exception
+	 */
 	@Override
 	public String decrypt(String text) throws Exception {
 		return decrypt(text, JWT_SIGNING_KEY);
 	}
 	
+	/**
+	 * Extract username.
+	 *
+	 * @param token the token
+	 * @return the string
+	 */
 	@Override
 	public String extractUsername(String token) {
 		return extractClaim(token, Claims::getSubject);
 	}
 
+	/**
+	 * Extract claim.
+	 *
+	 * @param <T> the generic type
+	 * @param token the token
+	 * @param resolver the resolver
+	 * @return the t
+	 */
 	@Override
 	public <T> T extractClaim(String token, Function<Claims, T> resolver) {
 		Claims claims = Jwts.parser().setSigningKey(JWT_SIGNING_KEY).parseClaimsJws(token).getBody();
 		return resolver.apply(claims);
 	}
 	
+	/**
+	 * Checks if is token expirate.
+	 *
+	 * @param token the token
+	 * @return true, if is token expirate
+	 */
 	@Override
 	public boolean isTokenExpirate(String token) {
 		try {
@@ -149,6 +226,14 @@ public class MGraphQLJwtService implements IMGraphQLJwtService {
 		}
 	}
 
+	/**
+	 * Decrypt.
+	 *
+	 * @param text the text
+	 * @param key the key
+	 * @return the string
+	 * @throws Exception the exception
+	 */
 	@Override
 	public String decrypt(String text, String key) throws Exception {		
 		byte[] keyByte = getKeyByte(key);
@@ -161,11 +246,24 @@ public class MGraphQLJwtService implements IMGraphQLJwtService {
 		return new String(textoDescriptografado);
 	}
 	
+	/**
+	 * Gets the key byte.
+	 *
+	 * @return the key byte
+	 * @throws Exception the exception
+	 */
 	@Override
 	public byte[] getKeyByte() throws Exception {
 		return getKeyByte(JWT_SIGNING_KEY);
 	}
 
+	/**
+	 * Gets the key byte.
+	 *
+	 * @param skey the skey
+	 * @return the key byte
+	 * @throws Exception the exception
+	 */
 	@Override
 	public byte[] getKeyByte(String skey) throws Exception {
 		JWT_SIGNING_KEY = skey;

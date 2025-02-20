@@ -10,6 +10,10 @@ import br.com.m4rc310.core.graphql.properties.MGraphQLProperty;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MGraphQLAutoConfiguration.
+ */
 @Slf4j
 @AutoConfiguration
 @EnableWebSecurity
@@ -18,6 +22,9 @@ import lombok.extern.slf4j.Slf4j;
 @ComponentScan(basePackages = "br.com.m4rc310.core.graphql")
 public class MGraphQLAutoConfiguration {
 	
+	/**
+	 * Inits the.
+	 */
 	@PostConstruct
 	void init() {
 		log.info("~> Loading {}...", getClass().getSimpleName());

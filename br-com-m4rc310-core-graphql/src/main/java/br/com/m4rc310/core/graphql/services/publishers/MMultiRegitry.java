@@ -9,7 +9,16 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import reactor.core.publisher.FluxSink;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MMultiRegitry.
+ *
+ * @param <K> the key type
+ * @param <T> the generic type
+ */
 public class MMultiRegitry<K, T>  {
+	
+	/** The map. */
 	private final ConcurrentMap<K, List<FluxSink<?>>> map = new ConcurrentHashMap<>();
 
 	/**

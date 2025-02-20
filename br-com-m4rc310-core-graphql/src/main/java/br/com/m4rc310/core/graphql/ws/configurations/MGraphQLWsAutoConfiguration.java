@@ -23,6 +23,10 @@ import io.leangen.graphql.spqr.spring.web.mvc.websocket.GraphQLWebSocketExecutor
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MGraphQLWsAutoConfiguration.
+ */
 @Slf4j
 @AutoConfiguration
 @EnableWebSocket
@@ -31,9 +35,19 @@ import lombok.extern.slf4j.Slf4j;
 @ConditionalOnProperty(name = IConsts.ENABLE_GRAPHQL_WS, havingValue = "false", matchIfMissing = false)
 public class MGraphQLWsAutoConfiguration  extends WebSocketAutoConfiguration{
 
+	/** The config. */
 	private SpqrProperties config;
+	
+	/** The graph QL. */
 	private GraphQL graphQL;
 	
+	/**
+	 * Instantiates a new m graph QL ws auto configuration.
+	 *
+	 * @param graphQL the graph QL
+	 * @param config the config
+	 * @param dataLoaderRegistryFactory the data loader registry factory
+	 */
 	public MGraphQLWsAutoConfiguration(GraphQL graphQL, SpqrProperties config,
 			Optional<DataLoaderRegistryFactory> dataLoaderRegistryFactory) {
 		super(graphQL, config, dataLoaderRegistryFactory);
@@ -41,11 +55,20 @@ public class MGraphQLWsAutoConfiguration  extends WebSocketAutoConfiguration{
 		this.config = config;
 	}
 
+	/**
+	 * Inits the.
+	 */
 	@PostConstruct
 	void init() {
 		log.info("~> Loading {}...", getClass().getSimpleName());
 	}
 	
+	/**
+	 * Web socket handler.
+	 *
+	 * @param executor the executor
+	 * @return the per connection apollo handler
+	 */
 	@Override
 	public PerConnectionApolloHandler webSocketHandler(GraphQLWebSocketExecutor executor) {
 		
@@ -58,6 +81,11 @@ public class MGraphQLWsAutoConfiguration  extends WebSocketAutoConfiguration{
 		return new MPerConnectionProtocolHandler(graphQL, executor, taskScheduler, keepAliveInterval, sendTimeLimit, sendBufferSizeLimit);
 	}
 	
+	/**
+	 * Default task scheduler.
+	 *
+	 * @return the task scheduler
+	 */
 	private TaskScheduler defaultTaskScheduler() {
 		ThreadPoolTaskScheduler threadPoolScheduler = new ThreadPoolTaskScheduler();
 		threadPoolScheduler.setThreadNamePrefix("GraphQLWSKeepAlive-");

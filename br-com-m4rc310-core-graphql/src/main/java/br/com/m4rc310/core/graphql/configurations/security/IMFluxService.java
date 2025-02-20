@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package br.com.m4rc310.core.graphql.configurations.security;
 
 import java.lang.reflect.Field;
@@ -8,6 +11,10 @@ import org.reactivestreams.Publisher;
 import br.com.m4rc310.core.graphql.configurations.security.dtos.MUser;
 import reactor.core.publisher.Flux;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface IMFluxService.
+ */
 public interface IMFluxService {
 
 	/**
@@ -25,10 +32,10 @@ public interface IMFluxService {
 	 * publish.
 	 * </p>
 	 *
+	 * @param <T>          a T class
 	 * @param type         a {@link java.lang.Class} object
 	 * @param key          a {@link java.lang.Object} object
 	 * @param defaultValue a T object
-	 * @param <T>          a T class
 	 * @return a {@link org.reactivestreams.Publisher} object
 	 */
 	<T> Publisher<T> publish(Class<T> type, Object key, T defaultValue);
@@ -48,10 +55,10 @@ public interface IMFluxService {
 	 * publishList.
 	 * </p>
 	 *
+	 * @param <T>          a T class
 	 * @param type         a {@link java.lang.Class} object
 	 * @param key          a {@link java.lang.Object} object
 	 * @param defaultValue a {@link java.util.List} object
-	 * @param <T>          a T class
 	 * @return a {@link reactor.core.publisher.Flux} object
 	 */
 	<T> Flux<List<T>> publishList(Class<T> type, Object key, List<T> defaultValue);
@@ -71,7 +78,7 @@ public interface IMFluxService {
 	 * @param <T>   the generic type
 	 * @param key   the key
 	 * @param value the value
-	 * @throws java.lang.Exception the exception
+	 * @throws Exception the exception
 	 */
 	<T> void callPublish(Object key, T value) throws Exception;
 
@@ -79,11 +86,18 @@ public interface IMFluxService {
 	 * Call publish from type.
 	 *
 	 * @param <T>   the generic type
+	 * @param type the type
 	 * @param value the value
-	 * @throws java.lang.Exception the exception
+	 * @throws Exception the exception
 	 */
 	<T> void callPublish(Class<T> type, T value) throws Exception;
 
+	/**
+	 * Gets the keys.
+	 *
+	 * @param type the type
+	 * @return the keys
+	 */
 	List<String> getKeys(Class<?> type);
 
 	/**
@@ -102,7 +116,7 @@ public interface IMFluxService {
 	 * @param type  the type
 	 * @param key   the key
 	 * @param value the value
-	 * @throws java.lang.Exception the exception
+	 * @throws Exception the exception
 	 */
 	<T> void callPublish(Class<T> type, Object key, T value) throws Exception;
 
@@ -111,10 +125,10 @@ public interface IMFluxService {
 	 * callListPublish.
 	 * </p>
 	 *
+	 * @param <T>  a T class
 	 * @param type a {@link java.lang.Class} object
 	 * @param key  a {@link java.lang.Object} object
 	 * @param list a {@link java.util.List} object
-	 * @param <T>  a T class
 	 */
 	<T> void callListPublish(Class<T> type, Object key, List<T> list);
 
@@ -135,12 +149,32 @@ public interface IMFluxService {
 	 */
 	Field getFieldFromType(Class<?> type, Class<?> typeField);
 
+	/**
+	 * Sets the user.
+	 *
+	 * @param user the new user
+	 */
 	void setUser(MUser user);
 
+	/**
+	 * Gets the user.
+	 *
+	 * @return the user
+	 */
 	MUser getUser();
 
+	/**
+	 * Sets the IP client.
+	 *
+	 * @param ipClient the new IP client
+	 */
 	void setIPClient(String ipClient);
 
+	/**
+	 * Gets the IP client.
+	 *
+	 * @return the IP client
+	 */
 	String getIPClient();
 
 }

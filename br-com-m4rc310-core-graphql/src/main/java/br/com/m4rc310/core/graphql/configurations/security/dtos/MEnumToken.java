@@ -5,14 +5,33 @@ import java.util.Arrays;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Enum MEnumToken.
+ */
 @AllArgsConstructor
 public enum MEnumToken {
-	TEST("Test"), BASIC("Basic"), BEARER("Bearer"), NONE("none");
+	
+	/** The test. */
+	TEST("Test"), 
+ /** The basic. */
+ BASIC("Basic"), 
+ /** The bearer. */
+ BEARER("Bearer"), 
+ /** The none. */
+ NONE("none");
 
+	/** The description. */
 	@Getter
 	private String description;
 	
-	 public static MEnumToken fromDescription(String description) {
+	 /**
+ 	 * From description.
+ 	 *
+ 	 * @param description the description
+ 	 * @return the m enum token
+ 	 */
+ 	public static MEnumToken fromDescription(String description) {
 	        return Arrays.stream(MEnumToken.values())
 	                .filter(e -> e.description.equalsIgnoreCase(description))
 	                .findFirst()

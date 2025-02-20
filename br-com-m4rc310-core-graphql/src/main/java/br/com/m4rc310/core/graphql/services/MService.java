@@ -10,18 +10,30 @@ import br.com.m4rc310.core.graphql.configurations.security.dtos.MUserPrincipal;
 import br.com.m4rc310.core.graphql.messages.MMessageBuilder;
 import br.com.m4rc310.core.graphql.properties.IConsts;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MService.
+ */
 @Configuration
 public class MService implements IConsts {
 
+	/** The is dev. */
 	@Value(VALUE_IS_DEV)
 	protected boolean isDev;
 	
+	/** The flux. */
 	@Autowired
 	protected IMFluxService flux;
 	
+	/** The m. */
 	@Autowired
 	protected MMessageBuilder m;
 
+	/**
+	 * Gets the user username.
+	 *
+	 * @return the user username
+	 */
 	protected String getUserUsername() {
 		try {
 			MUserPrincipal principal = (MUserPrincipal) SecurityContextHolder.getContext().getAuthentication()

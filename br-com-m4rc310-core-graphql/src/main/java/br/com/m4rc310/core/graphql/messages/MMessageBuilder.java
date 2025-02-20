@@ -57,24 +57,47 @@ import graphql.schema.GraphQLSchema;
 import io.leangen.graphql.metadata.messages.MessageBundle;
 import lombok.extern.slf4j.Slf4j;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MMessageBuilder.
+ */
 @Slf4j
 @Configuration
 public class MMessageBuilder implements IConsts{
 
+	/** The messages. */
 	private final Map<String, Map<String, String>> messages = new HashMap<>();
+	
+	/** The lv. */
 	private int lv = 0;
 
+	/** The is dev. */
 	@Value(VALUE_IS_DEV)
 	private boolean isDev;
 
+	/**
+	 * Instantiates a new m message builder.
+	 */
 	public MMessageBuilder() {
 	}
 	
+	/**
+	 * Message bundle.
+	 *
+	 * @param messageBuilder the message builder
+	 * @param messageSource the message source
+	 * @return the message bundle
+	 */
 	@Bean
 	MessageBundle messageBundle(MMessageBuilder messageBuilder, MessageSource messageSource) {
 		return key -> getString(messageBuilder, messageSource, key);
 	}
 
+	/**
+	 * Gets the message source.
+	 *
+	 * @return the message source
+	 */
 	@Bean("messageSource")
 	MessageSource getMessageSource() {
 		ResourceBundleMessageSource source = new ResourceBundleMessageSource();
@@ -83,8 +106,25 @@ public class MMessageBuilder implements IConsts{
 		return source;
 	}
 
+	/**
+	 * The listener interface for receiving MApplication events.
+	 * The class that is interested in processing a MApplication
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addMApplicationListener</code> method. When
+	 * the MApplication event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see MApplicationEvent
+	 */
 	@Component
 	public class MApplicationListener implements ApplicationListener<ApplicationReadyEvent> {
+		
+		/**
+		 * On application event.
+		 *
+		 * @param event the event
+		 */
 		@Override
 		public void onApplicationEvent(ApplicationReadyEvent event) {
 			if (isDev) {
@@ -94,6 +134,15 @@ public class MMessageBuilder implements IConsts{
 		}
 	}
 	
+	/**
+	 * Gets the string.
+	 *
+	 * @param messageBuilder the message builder
+	 * @param messageSource the message source
+	 * @param pattern the pattern
+	 * @param args the args
+	 * @return the string
+	 */
 	public String getString(MMessageBuilder messageBuilder, MessageSource messageSource, String pattern,
 			Object... args) {
 		String REGEX = "[^a-zA-Z0-9_]+";
@@ -115,6 +164,12 @@ public class MMessageBuilder implements IConsts{
 		}
 	}
 	
+	/**
+	 * Make error interceptor.
+	 *
+	 * @param schema the schema
+	 * @return the graph QL
+	 */
 	@Bean
 	GraphQL makeErrorInterceptor(GraphQLSchema schema) {
 		Builder builder = GraphQL.newGraphQL(schema);
@@ -169,6 +224,11 @@ public class MMessageBuilder implements IConsts{
 	}
 	
 	
+	/**
+	 * Physical naming strategy standard.
+	 *
+	 * @return the physical naming strategy standard impl
+	 */
 	@Bean
 	PhysicalNamingStrategyStandardImpl physicalNamingStrategyStandard() {
 		return new MPhysicalNamingImpl() {
@@ -210,6 +270,11 @@ public class MMessageBuilder implements IConsts{
 		};
 	}
 
+	/**
+	 * Load implicit naming strategy.
+	 *
+	 * @return the implicit naming strategy
+	 */
 	@Bean
 	ImplicitNamingStrategy loadImplicitNamingStrategy() {
 		return new ImplicitNamingStrategyLegacyJpaImpl() {
@@ -268,6 +333,13 @@ public class MMessageBuilder implements IConsts{
 		};
 	}
 
+	/**
+	 * Gets the message.
+	 *
+	 * @param key the key
+	 * @param args the args
+	 * @return the message
+	 */
 	public String getMessage(String key, Object... args) {
 		try {
 			if (key.contains("${") && key.contains("}")) {
@@ -292,6 +364,12 @@ public class MMessageBuilder implements IConsts{
 		return key;
 	}
 
+	/**
+	 * Append text.
+	 *
+	 * @param key the key
+	 * @param text the text
+	 */
 	public void appendText(String key, String text) {
 
 		try {
@@ -307,6 +385,12 @@ public class MMessageBuilder implements IConsts{
 		}
 	}
 
+	/**
+	 * Find all interfaces.
+	 *
+	 * @param clasz the clasz
+	 * @return the list
+	 */
 	private List<Class<?>> findAllInterfaces(Class<? extends Annotation> clasz) {
 		final ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(
 				false) {
@@ -340,6 +424,9 @@ public class MMessageBuilder implements IConsts{
 	}
 
 	
+	/**
+	 * Fix unknow messages.
+	 */
 	public void fixUnknowMessages() {
 		findAllInterfaces(MConstants.class).forEach(clasz -> {
 			PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(

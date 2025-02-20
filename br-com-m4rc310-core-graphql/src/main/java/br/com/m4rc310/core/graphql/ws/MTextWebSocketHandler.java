@@ -50,32 +50,67 @@ import lombok.extern.slf4j.Slf4j;
 import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MTextWebSocketHandler.
+ */
 @Slf4j
 @Configuration
 @EqualsAndHashCode(callSuper = false)
 @ConditionalOnProperty(name = IConsts.ENABLE_GRAPHQL_WS, havingValue = "false", matchIfMissing = false)
 public class MTextWebSocketHandler extends TextWebSocketHandler {
+	
+	/** The session. */
 	private WebSocketSession session;
+	
+	/** The task scheduler. */
 	private TaskScheduler taskScheduler;
+	
+	/** The keep alive interval. */
 	private int keepAliveInterval;
+	
+	/** The jwt service. */
 	private MGraphQLJwtService jwtService;
+	
+	/** The context. */
 	private ApplicationContext context;
+	
+	/** The subscriptions. */
 	private final Map<String, Disposable> subscriptions = new ConcurrentHashMap<>();
+	
+	/** The keep alive. */
 	private final AtomicReference<ScheduledFuture<?>> keepAlive = new AtomicReference<>();
 
+	/** The graph QL. */
 	@Autowired
 	private GraphQL graphQL;
 
+	/** The executor. */
 	@Autowired
 	private GraphQLWebSocketExecutor executor;
+	
+	/** The jwt. */
 	@Autowired
 	private IMGraphQLJwtService jwt;
 
+	/**
+	 * After connection established.
+	 *
+	 * @param session the session
+	 * @throws Exception the exception
+	 */
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		super.afterConnectionEstablished(session);
 	}
 
+	/**
+	 * Handle text message.
+	 *
+	 * @param session the session
+	 * @param message the message
+	 * @throws Exception the exception
+	 */
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		MMessage mmessage = MMessages.from(message);
@@ -147,6 +182,13 @@ public class MTextWebSocketHandler extends TextWebSocketHandler {
 		}
 	}
 
+	/**
+	 * Gets the user from payload.
+	 *
+	 * @param payload the payload
+	 * @return the user from payload
+	 * @throws Exception the exception
+	 */
 	private MUser getUserFromPayload(String payload) throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
@@ -163,6 +205,13 @@ public class MTextWebSocketHandler extends TextWebSocketHandler {
 		return jwt.getMUser(type, stoken);
 	}
 
+	/**
+	 * Handle query or mutation.
+	 *
+	 * @param id the id
+	 * @param result the result
+	 * @param session the session
+	 */
 	private void handleQueryOrMutation(String id, ExecutionResult result, WebSocketSession session) {
 		try {
 			session.sendMessage(MMessages.data(id, result));
@@ -172,11 +221,23 @@ public class MTextWebSocketHandler extends TextWebSocketHandler {
 		}
 	}
 
+	/**
+	 * Handle transport error.
+	 *
+	 * @param session the session
+	 * @param exception the exception
+	 */
 	@Override
 	public void handleTransportError(WebSocketSession session, Throwable exception) {
 		fatalError(session, exception);
 	}
 
+	/**
+	 * Fatal error.
+	 *
+	 * @param session the session
+	 * @param exception the exception
+	 */
 	private void fatalError(WebSocketSession session, Throwable exception) {
 		try {
 			session.close(
@@ -187,6 +248,13 @@ public class MTextWebSocketHandler extends TextWebSocketHandler {
 		cancelAll();
 	}
 
+	/**
+	 * Handle subscription.
+	 *
+	 * @param id the id
+	 * @param executionResult the execution result
+	 * @param session the session
+	 */
 	private void handleSubscription(String id, ExecutionResult executionResult, WebSocketSession session) {
 		Publisher<ExecutionResult> events = executionResult.getData();
 
@@ -197,6 +265,13 @@ public class MTextWebSocketHandler extends TextWebSocketHandler {
 		}
 	}
 
+	/**
+	 * On next.
+	 *
+	 * @param result the result
+	 * @param id the id
+	 * @param session the session
+	 */
 	private void onNext(ExecutionResult result, String id, WebSocketSession session) {
 		try {
 			if (result.getErrors().isEmpty()) {
