@@ -27,7 +27,7 @@
 		<maven.compiler.source>22</maven.compiler.source>
 		<java.version>22</java.version>
 		<spqr.version>0.12.4</spqr.version>
-<!--		<spring-boot.version>3.1.12</spring-boot.version>-->
+		<!--		<spring-boot.version>3.1.12</spring-boot.version>-->
 		<spring-boot.version>3.4.2</spring-boot.version>
 		<fastjson.version>1.2.24</fastjson.version>
 		<spqr.utils.version>0.0.7</spqr.utils.version>
@@ -44,10 +44,10 @@
 
 	<scm>
 		<connection>
-			scm:git:git@github.com:m4rc310RCP/api-open.git</connection>
+			scm:git:git@github.com/m4rc310RCP/core-api.git</connection>
 		<developerConnection>
-			scm:git:ssh://git@github.com:m4rc310RCP/api-open.git</developerConnection>
-		<url>https://github.com/m4rc310RCP/api-open</url>
+			scm:git:ssh://git@https://github.com/m4rc310RCP/core-api.git</developerConnection>
+		<url>https://github.com/m4rc310RCP/core-api.git</url>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -126,6 +126,14 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 				<version>3.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 			<plugin>
@@ -165,7 +173,7 @@
 				</executions>
 			</plugin>
 
-			
+
 		</plugins>
 
 		<pluginManagement>
