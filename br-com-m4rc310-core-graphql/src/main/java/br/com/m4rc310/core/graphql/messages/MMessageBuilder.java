@@ -120,6 +120,11 @@ public class MMessageBuilder implements IConsts{
 	public class MApplicationListener implements ApplicationListener<ApplicationReadyEvent> {
 		
 		/**
+		 * MApplicationListener
+		 */
+		public MApplicationListener() {}
+		
+		/**
 		 * On application event.
 		 *
 		 * @param event the event

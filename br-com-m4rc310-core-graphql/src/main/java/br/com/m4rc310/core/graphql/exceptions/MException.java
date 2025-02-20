@@ -1,6 +1,5 @@
 package br.com.m4rc310.core.graphql.exceptions;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 // TODO: Auto-generated Javadoc
@@ -11,7 +10,7 @@ import lombok.Getter;
  * 
  */
 @Getter
-@AllArgsConstructor(staticName = "to")
+//@AllArgsConstructor(staticName = "to")
 public class MException extends Exception {
 	
 	/** The Constant serialVersionUID. */
@@ -22,10 +21,26 @@ public class MException extends Exception {
 	
 	/** The message. */
 	private String message;
+
+	/**
+	 * @param code
+	 * @param message
+	 */
+	public MException(int code, String message) {
+		super();
+		this.code = code;
+		this.message = message;
+	}
 	
 	/**
-	 * <p>Constructor for MException.</p>
+	 * @param code
+	 * @param message
+	 * @return
 	 */
-	public MException() {
+	public static final MException to(int code, String message) {
+		return new MException(code, message);
 	}
+	
+	
+	
 }

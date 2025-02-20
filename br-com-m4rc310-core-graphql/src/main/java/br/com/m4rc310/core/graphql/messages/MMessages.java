@@ -37,6 +37,16 @@ public class MMessages {
 	private static final ObjectMapper mapper = new ObjectMapper()
 			.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 	
+	
+	
+	
+	/**
+	 * MMessages
+	 */
+	public MMessages() {
+		super();
+	}
+
 	/**
 	 * From.
 	 *

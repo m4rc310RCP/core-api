@@ -4,13 +4,11 @@ import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
-import lombok.AllArgsConstructor;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class MHandlerProxy.
  */
-@AllArgsConstructor
+//@AllArgsConstructor
 public class MHandlerProxy {
 	
 	/** The handler. */
@@ -20,6 +18,18 @@ public class MHandlerProxy {
 	private final WebSocketSession session;
 	
 	
+	
+	
+	/**
+	 * @param handler
+	 * @param session
+	 */
+	public MHandlerProxy(MTextWebSocketHandler handler, WebSocketSession session) {
+		super();
+		this.handler = handler;
+		this.session = session;
+	}
+
 	/**
 	 * After connection established.
 	 *

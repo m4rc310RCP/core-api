@@ -32,7 +32,7 @@ private static final long serialVersionUID = 4607336427719715274L;
 	/**
 	 * <p>Constructor for UserPrincipal.</p>
 	 *
-	 * @param user a {@link br.com.m4rc310.gql.dto.MUser} object
+	 * @param user a object
 	 */
 	public MUserPrincipal(MUser user) {
 		this.username = user.getUsername();
@@ -47,8 +47,8 @@ private static final long serialVersionUID = 4607336427719715274L;
 	/**
 	 * <p>create.</p>
 	 *
-	 * @param user a {@link br.com.m4rc310.gql.dto.MUser} object
-	 * @return a {@link br.com.m4rc310.gql.security.UserPrincipal} object
+	 * @param user a object
+	 * @return a object
 	 */
 	public static MUserPrincipal create(MUser user){
         return new MUserPrincipal(user);

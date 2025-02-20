@@ -36,7 +36,7 @@ public class MGraphQLProperty implements IConsts{
 		private boolean enable;
 		
 		/**
-		 * 
+		 * Security
 		 */
 		public Security() {}
 	}
@@ -51,7 +51,7 @@ public class MGraphQLProperty implements IConsts{
 		private boolean enable;
 		
 		/**
-		 * 
+		 * Ws
 		 */
 		public Ws() {}
 	}
