@@ -28,6 +28,13 @@ public class MService implements IConsts {
 	/** The m. */
 	@Autowired
 	protected MMessageBuilder m;
+	
+	
+	/**
+	 * 
+	 */
+	public MService() {
+	}
 
 	/**
 	 * Gets the user username.

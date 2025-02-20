@@ -92,6 +92,11 @@ public class MTextWebSocketHandler extends TextWebSocketHandler {
 	/** The jwt. */
 	@Autowired
 	private IMGraphQLJwtService jwt;
+	
+	/**
+	 * 
+	 */
+	public MTextWebSocketHandler(){}
 
 	/**
 	 * After connection established.

@@ -50,6 +50,11 @@ public class MGraphQLJwtService implements IMGraphQLJwtService {
 	@Value(AUTH_SECURITY_KEY_LENGTH)
 	private int JWT_KEY_LENGTH;
 	
+	/**
+	 * 
+	 */
+	public MGraphQLJwtService (){}
+	
 
 	/**
 	 * Gets the DTO user.

@@ -22,6 +22,11 @@ public class MGraphQLProperty implements IConsts{
 	private Ws ws = new Ws();
 	
 	/**
+	 * 
+	 */
+	public MGraphQLProperty(){}
+	
+	/**
 	 * The Class Security.
 	 */
 	@Data
@@ -29,6 +34,11 @@ public class MGraphQLProperty implements IConsts{
 		
 		/** The enable. */
 		private boolean enable;
+		
+		/**
+		 * 
+		 */
+		public Security() {}
 	}
 
 	/**
@@ -39,6 +49,11 @@ public class MGraphQLProperty implements IConsts{
 		
 		/** The enable. */
 		private boolean enable;
+		
+		/**
+		 * 
+		 */
+		public Ws() {}
 	}
 	
 	

@@ -13,6 +13,13 @@ public class MPhysicalNamingImpl extends PhysicalNamingStrategyStandardImpl {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 3926477315094654268L;
 
+	
+	/**
+	 * 
+	 */
+	public MPhysicalNamingImpl() {
+	}
+	
 	/**
 	 * To physical sequence name.
 	 *

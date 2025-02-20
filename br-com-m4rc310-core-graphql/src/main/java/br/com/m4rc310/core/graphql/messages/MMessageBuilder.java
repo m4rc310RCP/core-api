@@ -115,7 +115,6 @@ public class MMessageBuilder implements IConsts{
 	 * the MApplication event occurs, that object's appropriate
 	 * method is invoked.
 	 *
-	 * @see MApplicationEvent
 	 */
 	@Component
 	public class MApplicationListener implements ApplicationListener<ApplicationReadyEvent> {

@@ -30,6 +30,14 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 public class MAuthInterceptor implements ResolverInterceptor {
 	
+	
+	/**
+	 * 
+	 */
+	public MAuthInterceptor() {
+	}
+	
+	
 	/**
 	 * Custom interceptors.
 	 *

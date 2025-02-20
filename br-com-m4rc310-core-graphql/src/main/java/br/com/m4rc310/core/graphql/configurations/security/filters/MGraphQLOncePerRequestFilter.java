@@ -30,6 +30,13 @@ public class MGraphQLOncePerRequestFilter extends OncePerRequestFilter {
 	/** The jwt. */
 	@Autowired
 	private IMGraphQLJwtService jwt;
+	
+	/**
+	 * 
+	 */
+	public MGraphQLOncePerRequestFilter() {
+
+	} 
 
 	/**
 	 * Do filter internal.

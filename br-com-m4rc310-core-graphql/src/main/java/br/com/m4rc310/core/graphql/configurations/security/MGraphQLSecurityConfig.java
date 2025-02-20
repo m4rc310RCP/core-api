@@ -39,6 +39,14 @@ public class MGraphQLSecurityConfig implements IConsts {
 	@Value(VALUE_GRAPHQL_SERVER_ENDPOINT)
 	private String SERVER_ENDPOINT;
 	
+	
+	/**
+	 * 
+	 */
+	public MGraphQLSecurityConfig() {
+	}
+	
+	
 	/**
 	 * Inits the.
 	 */

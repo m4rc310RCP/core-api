@@ -45,6 +45,12 @@ public class MUser  implements UserDetails{
 	private boolean enabled;
 	
 	/**
+	 * 
+	 */
+	public MUser() {}
+	
+	
+	/**
 	 * Gets the authorities.
 	 *
 	 * @return the authorities

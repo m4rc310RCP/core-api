@@ -30,6 +30,13 @@ public class MFluxService implements IMFluxService {
 	/** The ip client. */
 	private String ipClient;
 
+	
+	/**
+	 * 
+	 */
+	public MFluxService() {
+	}
+	
 	/**
 	 * Publish.
 	 *

@@ -19,6 +19,7 @@ public class MHandlerProxy {
 	/** The session. */
 	private final WebSocketSession session;
 	
+	
 	/**
 	 * After connection established.
 	 *

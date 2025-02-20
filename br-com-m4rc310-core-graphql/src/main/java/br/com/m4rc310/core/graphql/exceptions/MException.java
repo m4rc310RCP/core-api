@@ -7,6 +7,9 @@ import lombok.Getter;
 /**
  * The Class MException.
  */
+/**
+ * 
+ */
 @Getter
 @AllArgsConstructor(staticName = "to")
 public class MException extends Exception {
@@ -19,4 +22,10 @@ public class MException extends Exception {
 	
 	/** The message. */
 	private String message;
+	
+	/**
+	 * 
+	 */
+	public MException() {
+	}
 }
