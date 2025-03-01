@@ -1,4 +1,4 @@
-package br.com.m4rc310.core.graphql.configurations;
+package br.com.m4rc310.core.gtim;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -6,36 +6,22 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
-import br.com.m4rc310.core.graphql.properties.MGraphQLProperty;
+import br.com.m4rc310.core.gtim.constants.IConsts;
+import br.com.m4rc310.core.gtim.properties.MGtimProperty;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class MGraphQLAutoConfiguration.
- */
 @Slf4j
 @AutoConfiguration
 @EnableWebSecurity
-@EnableConfigurationProperties(MGraphQLProperty.class)
-@ConditionalOnProperty(name = MGraphQLProperty.ENABLE_GRAPHQL, havingValue = "true", matchIfMissing = false)
-@ComponentScan(basePackages = "br.com.m4rc310.core.graphql")
-public class MGraphQLAutoConfiguration {
+@EnableConfigurationProperties(MGtimProperty.class)
+@ComponentScan(basePackages = MGtimProperty.PROPS_GTIM)
+@ConditionalOnProperty(name = MGtimProperty.PROPS_GTIM_ENABLE, havingValue = "true", matchIfMissing = false)
+public class MGtimAutoConfiguration implements IConsts {
 	
 	
-	/**
-	 * MGraphQLAutoConfiguration
-	 */
-	public MGraphQLAutoConfiguration() {
-		super();
-	}
-
-	/**
-	 * Inits the.
-	 */
 	@PostConstruct
 	void init() {
 		log.info("~> Loading {}...", getClass().getSimpleName());
 	}
-	
 }

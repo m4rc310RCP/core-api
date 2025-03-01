@@ -29,10 +29,10 @@
 		<maven.compiler.source>22</maven.compiler.source>
 		<java.version>22</java.version>
 		<spqr.version>0.12.4</spqr.version>
-		<spring-boot.version>3.4.2</spring-boot.version>
+		<spring-boot.version>3.4.3</spring-boot.version>
 		<fastjson.version>1.2.24</fastjson.version>
 		<spqr.utils.version>0.0.7</spqr.utils.version>
-		<revision>0.0.0-SNAPSHOT</revision>
+		<revision>0.0.1-SNAPSHOT</revision>
 	</properties>
 
 	<licenses>
@@ -79,6 +79,19 @@
 				<artifactId>br-com-m4rc310-core-graphql</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>br.com.m4rc310</groupId>
+				<artifactId>br-com-m4rc310-core-gtim</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>br.com.m4rc310</groupId>
+				<artifactId>br-com-m4rc310-core-weather</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
 		</dependencies>
 	</dependencyManagement>
 
@@ -190,6 +203,8 @@
 		<module>br-com-m4rc310-core-libs</module>
 		<module>br-com-m4rc310-core-starter</module>
 		<module>br-com-m4rc310-core-graphql</module>
+		<module>br-com-m4rc310-core-weather</module>
+		<module>br-com-m4rc310-core-gtim</module>
 	</modules>
 
 </project>

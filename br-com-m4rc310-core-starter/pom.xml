@@ -24,6 +24,15 @@
 			<artifactId>br-com-m4rc310-core-graphql</artifactId>
 		</dependency>
 		
+		<dependency>
+			<groupId>br.com.m4rc310</groupId>
+			<artifactId>br-com-m4rc310-core-gtim</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.com.m4rc310</groupId>
+			<artifactId>br-com-m4rc310-core-weather</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>

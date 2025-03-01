@@ -63,11 +63,11 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Configuration
-public class MMessageBuilder implements IConsts{
+public class MMessageBuilder implements IConsts {
 
 	/** The messages. */
 	private final Map<String, Map<String, String>> messages = new HashMap<>();
-	
+
 	/** The lv. */
 	private int lv = 0;
 
@@ -80,12 +80,12 @@ public class MMessageBuilder implements IConsts{
 	 */
 	public MMessageBuilder() {
 	}
-	
+
 	/**
 	 * Message bundle.
 	 *
 	 * @param messageBuilder the message builder
-	 * @param messageSource the message source
+	 * @param messageSource  the message source
 	 * @return the message bundle
 	 */
 	@Bean
@@ -107,23 +107,22 @@ public class MMessageBuilder implements IConsts{
 	}
 
 	/**
-	 * The listener interface for receiving MApplication events.
-	 * The class that is interested in processing a MApplication
-	 * event implements this interface, and the object created
-	 * with that class is registered with a component using the
-	 * component's <code>addMApplicationListener</code> method. When
-	 * the MApplication event occurs, that object's appropriate
-	 * method is invoked.
+	 * The listener interface for receiving MApplication events. The class that is
+	 * interested in processing a MApplication event implements this interface, and
+	 * the object created with that class is registered with a component using the
+	 * component's <code>addMApplicationListener</code> method. When the
+	 * MApplication event occurs, that object's appropriate method is invoked.
 	 *
 	 */
 	@Component
 	public class MApplicationListener implements ApplicationListener<ApplicationReadyEvent> {
-		
+
 		/**
 		 * MApplicationListener
 		 */
-		public MApplicationListener() {}
-		
+		public MApplicationListener() {
+		}
+
 		/**
 		 * On application event.
 		 *
@@ -137,14 +136,14 @@ public class MMessageBuilder implements IConsts{
 			}
 		}
 	}
-	
+
 	/**
 	 * Gets the string.
 	 *
 	 * @param messageBuilder the message builder
-	 * @param messageSource the message source
-	 * @param pattern the pattern
-	 * @param args the args
+	 * @param messageSource  the message source
+	 * @param pattern        the pattern
+	 * @param args           the args
 	 * @return the string
 	 */
 	public String getString(MMessageBuilder messageBuilder, MessageSource messageSource, String pattern,
@@ -167,7 +166,7 @@ public class MMessageBuilder implements IConsts{
 			return ret;
 		}
 	}
-	
+
 	/**
 	 * Make error interceptor.
 	 *
@@ -177,33 +176,13 @@ public class MMessageBuilder implements IConsts{
 	@Bean
 	GraphQL makeErrorInterceptor(GraphQLSchema schema) {
 		Builder builder = GraphQL.newGraphQL(schema);
-		
-		   SubscriptionExecutionStrategy ses = new SubscriptionExecutionStrategy(new SimpleDataFetcherExceptionHandler() {
-		        @Override
-		        public CompletableFuture<DataFetcherExceptionHandlerResult> handleException(
-		                DataFetcherExceptionHandlerParameters handlerParameters) {
-		            return CompletableFuture.completedFuture(handleExceptionImpl(handlerParameters));
-		        }
 
-		        private DataFetcherExceptionHandlerResult handleExceptionImpl(
-		                DataFetcherExceptionHandlerParameters handlerParameters) {
-		            Throwable exception = unwrap(handlerParameters.getException());
-		            SourceLocation sourceLocation = handlerParameters.getSourceLocation();
-		            ResultPath path = handlerParameters.getPath();
-
-		            MExceptionWhileDataFetching error = new MExceptionWhileDataFetching(path, exception, sourceLocation);
-
-		            return DataFetcherExceptionHandlerResult.newResult().error(error).build();
-		        }
-		    });
-
-		AsyncExecutionStrategy aes = new AsyncExecutionStrategy(new SimpleDataFetcherExceptionHandler() {
+		SubscriptionExecutionStrategy ses = new SubscriptionExecutionStrategy(new SimpleDataFetcherExceptionHandler() {
 			@Override
 			public CompletableFuture<DataFetcherExceptionHandlerResult> handleException(
 					DataFetcherExceptionHandlerParameters handlerParameters) {
 				return CompletableFuture.completedFuture(handleExceptionImpl(handlerParameters));
 			}
-			
 
 			private DataFetcherExceptionHandlerResult handleExceptionImpl(
 					DataFetcherExceptionHandlerParameters handlerParameters) {
@@ -215,19 +194,34 @@ public class MMessageBuilder implements IConsts{
 
 				return DataFetcherExceptionHandlerResult.newResult().error(error).build();
 			}
-			
-			
+		});
+
+		AsyncExecutionStrategy aes = new AsyncExecutionStrategy(new SimpleDataFetcherExceptionHandler() {
+			@Override
+			public CompletableFuture<DataFetcherExceptionHandlerResult> handleException(
+					DataFetcherExceptionHandlerParameters handlerParameters) {
+				return CompletableFuture.completedFuture(handleExceptionImpl(handlerParameters));
+			}
+
+			private DataFetcherExceptionHandlerResult handleExceptionImpl(
+					DataFetcherExceptionHandlerParameters handlerParameters) {
+				Throwable exception = unwrap(handlerParameters.getException());
+				SourceLocation sourceLocation = handlerParameters.getSourceLocation();
+				ResultPath path = handlerParameters.getPath();
+
+				MExceptionWhileDataFetching error = new MExceptionWhileDataFetching(path, exception, sourceLocation);
+
+				return DataFetcherExceptionHandlerResult.newResult().error(error).build();
+			}
 
 		});
-		
 
 		builder.queryExecutionStrategy(aes);
 		builder.mutationExecutionStrategy(aes);
 		builder.subscriptionExecutionStrategy(ses);
 		return builder.build();
 	}
-	
-	
+
 	/**
 	 * Physical naming strategy standard.
 	 *
@@ -340,7 +334,7 @@ public class MMessageBuilder implements IConsts{
 	/**
 	 * Gets the message.
 	 *
-	 * @param key the key
+	 * @param key  the key
 	 * @param args the args
 	 * @return the message
 	 */
@@ -371,7 +365,7 @@ public class MMessageBuilder implements IConsts{
 	/**
 	 * Append text.
 	 *
-	 * @param key the key
+	 * @param key  the key
 	 * @param text the text
 	 */
 	public void appendText(String key, String text) {
@@ -427,7 +421,6 @@ public class MMessageBuilder implements IConsts{
 		return ret;
 	}
 
-	
 	/**
 	 * Fix unknow messages.
 	 */
@@ -561,9 +554,9 @@ public class MMessageBuilder implements IConsts{
 						sb2.append("	//").append("-".repeat(50)).append("\n");
 
 						map.forEach((k, v) -> {
-							String a1 = String.format("%s$%s", skey, k.replace(key + ".", "").replace(".", "_"));
+							String a1 = String.format("%s$%s", skey, k.substring(key.length() + 1).replace(".", "_"));
 							String a2 = String.format("DESC$%s_%s", skey.toLowerCase(),
-									k.replace(key + ".", "").replace(".", "_"));
+									k.substring(key.length() + 1).replace(".", "_"));
 							// sb2.append("//").append("-".repeat(50)).append("\n");
 
 							String action = "@GraphQLQuery";
@@ -587,8 +580,8 @@ public class MMessageBuilder implements IConsts{
 							}
 
 							String variable = String.format("	public static final String %s$%s", skey,
-									k.replace(key + ".", "").replace(".", "_"));
-
+									k.substring(key.length() + 1).replace(".", "_"));
+							
 //							int rest = lv - variable.length();
 							// int rest = variable.length();
 							// String sp = rest > 0 ? " ".repeat(rest) : "";

@@ -1,8 +1,11 @@
 package br.com.m4rc310.core.graphql.services;
 
+import java.security.SecureRandom;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import br.com.m4rc310.core.graphql.configurations.security.IMFluxService;
@@ -29,6 +32,9 @@ public class MService implements IConsts {
 	@Autowired
 	protected MMessageBuilder m;
 	
+	@Autowired
+	protected TaskScheduler taskScheduler;
+	
 	
 	/**
 	 * <p>Constructor for MService.</p>
@@ -50,4 +56,15 @@ public class MService implements IConsts {
 			return null;
 		}
 	}
+	
+	protected String generateRandomDigits(int length) {
+		SecureRandom random = new SecureRandom();
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int digit = random.nextInt(10);
+            sb.append(digit);
+        }
+        return sb.toString();
+    }
+	
 }
