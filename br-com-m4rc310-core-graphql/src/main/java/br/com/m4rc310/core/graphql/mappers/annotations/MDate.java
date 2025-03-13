@@ -27,5 +27,6 @@ public @interface MDate {
 	 *
 	 * @return true, if successful
 	 */
-	boolean unixFormat() default false;
+	boolean toUnix() default false;
+	boolean toUTC() default false;
 }

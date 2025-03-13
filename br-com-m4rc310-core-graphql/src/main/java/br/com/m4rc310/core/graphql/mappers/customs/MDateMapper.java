@@ -4,6 +4,8 @@ import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.AnnotatedType;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import br.com.m4rc310.core.graphql.mappers.MGraphQLScalarType;
@@ -31,11 +33,22 @@ public class MDateMapper extends MGraphQLScalarType<MDate> {
 
 		final String format = annotation.value();
 
-		if (annotation.unixFormat()) {
+		if (annotation.toUnix()) {
 			String skey = String.format("DateUnix_%s", hashString(format));
+			
 			Coercing<Long, String> coercing = getCoercing(Long.class, sdate -> dateToUnix(sdate, format),
 					unix -> unixToString(unix, format));
+			
 			return get(skey, getString("Date format: {0}", format), coercing);
+		} else if (annotation.toUTC()){
+			String skey = String.format("DateUTC_%s", hashString(format));
+			
+			String utcFormat = "YYYY-MM-DDTHH:mm:ss.sssZ";
+			
+			Coercing<Date, String> coercing = getCoercing(Date.class, sdate -> utcStringToDate(sdate),
+					date -> dateToUtcString(date));
+			
+			return get(skey, getString("Date format: {0}", utcFormat), coercing);
 		} else {
 			String skey = String.format("Date_%s", hashString(format));
 			Coercing<Date, String> coercing = getCoercing(Date.class, sdate -> stringToDate(sdate, format),
@@ -67,6 +80,36 @@ public class MDateMapper extends MGraphQLScalarType<MDate> {
 		DateFormat df = new SimpleDateFormat(format);
 		try {
 			return df.parse(sdate);
+		} catch (Exception e) {
+			throw new UnsupportedOperationException(e.getMessage());
+		}
+	}
+	/**
+	 * Date to string.
+	 *
+	 * @param date   the date
+	 * @param format the format
+	 * @return the string
+	 */
+	private String dateToUtcString(Date date) {
+		try {
+			return DateTimeFormatter.ISO_INSTANT.format(date.toInstant());	
+		} catch (Exception e) {
+			throw new UnsupportedOperationException(e.getMessage());
+		}
+	}
+	
+	/**
+	 * String to date.
+	 *
+	 * @param sdate  the sdate
+	 * @param format the format
+	 * @return the date
+	 */
+	private Date utcStringToDate(String sdate) {
+		try {
+			Instant instant = Instant.parse(sdate);
+			return Date.from(instant);
 		} catch (Exception e) {
 			throw new UnsupportedOperationException(e.getMessage());
 		}
@@ -104,5 +147,5 @@ public class MDateMapper extends MGraphQLScalarType<MDate> {
 			throw new UnsupportedOperationException(e.getMessage());
 		}
 	}
-
+	
 }
