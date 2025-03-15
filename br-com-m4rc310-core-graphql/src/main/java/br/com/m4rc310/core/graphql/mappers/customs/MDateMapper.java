@@ -10,6 +10,7 @@ import java.util.Date;
 
 import br.com.m4rc310.core.graphql.mappers.MGraphQLScalarType;
 import br.com.m4rc310.core.graphql.mappers.annotations.MDate;
+import br.com.m4rc310.core.graphql.mappers.annotations.MDate.DatePatther;
 import br.com.m4rc310.core.graphql.mappers.annotations.MMapper;
 import graphql.schema.Coercing;
 import graphql.schema.GraphQLScalarType;
@@ -33,14 +34,14 @@ public class MDateMapper extends MGraphQLScalarType<MDate> {
 
 		final String format = annotation.value();
 
-		if (annotation.toUnix()) {
+		if (annotation.patther().equals(DatePatther.UNIX)) {
 			String skey = String.format("DateUnix_%s", hashString(format));
 			
 			Coercing<Long, String> coercing = getCoercing(Long.class, sdate -> dateToUnix(sdate, format),
 					unix -> unixToString(unix, format));
 			
 			return get(skey, getString("Date format: {0}", format), coercing);
-		} else if (annotation.toUTC()){
+		} else if (annotation.patther().equals(DatePatther.UTC)){
 			String skey = String.format("DateUTC_%s", hashString(format));
 			
 			String utcFormat = "YYYY-MM-DDTHH:mm:ss.sssZ";

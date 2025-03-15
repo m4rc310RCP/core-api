@@ -23,10 +23,25 @@ public @interface MDate {
 	String value() default "dd/MM/yyyy HH:mm:ss";
 
 	/**
-	 * Unix format.
+	 * Patther of date.
 	 *
 	 * @return true, if successful
 	 */
-	boolean toUnix() default false;
-	boolean toUTC() default false;
+	DatePatther patther() default DatePatther.CUSTOM;
+	
+	
+//	boolean toUnix() default false;
+//	boolean toUTC() default false;
+	
+	/**
+	 * The Enum Case.
+	 */
+	public enum DatePatther {
+		/** The upper. */
+		UNIX,
+		/** The lower. */
+		UTC,
+		/** The none. */
+		CUSTOM
+	}
 }
