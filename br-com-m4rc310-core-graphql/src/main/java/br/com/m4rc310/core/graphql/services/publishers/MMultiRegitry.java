@@ -95,7 +95,7 @@ public class MMultiRegitry<K, T>  {
 		List<K> ret = new ArrayList<>();
 		final String typeName = type.getSimpleName();
 
-		map.forEach((k, v) -> {
+		map.forEach((k, _) -> {
 			String skey = k.toString();
 			if (skey.startsWith(typeName)) {
 				ret.add(k);

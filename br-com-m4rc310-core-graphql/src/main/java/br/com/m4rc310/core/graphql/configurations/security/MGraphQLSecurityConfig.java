@@ -63,7 +63,7 @@ public class MGraphQLSecurityConfig implements IConsts {
 	@Bean
 	@ConditionalOnProperty(name = ENABLE_GRAPHQL_SECURITY, havingValue = "false", matchIfMissing = true)
 	UserDetailsService userDetailsService() {
-		return username -> null;
+		return null;
 	}
 
 	/**

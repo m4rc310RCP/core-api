@@ -11,9 +11,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import br.com.m4rc310.core.graphql.configurations.security.annotations.MAuth;
 import br.com.m4rc310.core.graphql.configurations.security.dtos.MUserPrincipal;
 import br.com.m4rc310.core.graphql.exceptions.MException;
+import br.com.m4rc310.core.graphql.mappers.annotations.MAuth;
 import io.leangen.graphql.ExtensionProvider;
 import io.leangen.graphql.GeneratorConfiguration;
 import io.leangen.graphql.execution.InvocationContext;
@@ -46,7 +46,7 @@ public class MAuthInterceptor implements ResolverInterceptor {
 	@Bean
 	ExtensionProvider<GeneratorConfiguration, ResolverInterceptorFactory> customInterceptors() {
 		List<ResolverInterceptor> authInterceptor = Collections.singletonList(this);
-		return (config, interceptors) -> interceptors.append(new GlobalResolverInterceptorFactory(authInterceptor));
+		return (_, interceptors) -> interceptors.append(new GlobalResolverInterceptorFactory(authInterceptor));
 	}
 
 	/**
@@ -71,12 +71,12 @@ public class MAuthInterceptor implements ResolverInterceptor {
 			if (Objects.isNull(auth) && isBasicToken) {
 				throw getWebException(401, "Access unauthorizade. User with basic privileges!");
 			} else if (Objects.nonNull(auth)) {
-				if (isBasicToken && !Arrays.asList(auth.rolesRequired()).stream().anyMatch(aa -> "basic".equalsIgnoreCase(aa))) {
+				if (isBasicToken && !Arrays.asList(auth.roles()).stream().anyMatch(aa -> "basic".equalsIgnoreCase(aa))) {
 					throw getWebException(401, "Access unauthorizade. User with basic privileges!");
 				}
 
 				boolean isAuth = principal == null ? false : principal.getAuthorities().stream().anyMatch(ga -> {
-					for (String role : auth.rolesRequired()) {
+					for (String role : auth.roles()) {
 						if (role.equalsIgnoreCase(ga.getAuthority())) {
 							return true;
 						}

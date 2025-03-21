@@ -434,7 +434,7 @@ public class MMessageBuilder implements IConsts {
 
 					// ================================================
 					// Messages not in *.properties
-					messages.forEach((key, value) -> {
+					messages.forEach((_, value) -> {
 						value.forEach((skey, svalue) -> {
 							if (!skey.startsWith("desc.")) {
 								// -------
@@ -553,7 +553,7 @@ public class MMessageBuilder implements IConsts {
 						sb2.append("	// ").append(String.format("********** %s **********\n", skey));
 						sb2.append("	//").append("-".repeat(50)).append("\n");
 
-						map.forEach((k, v) -> {
+						map.forEach((k, _) -> {
 							String a1 = String.format("%s$%s", skey, k.substring(key.length() + 1).replace(".", "_"));
 							String a2 = String.format("DESC$%s_%s", skey.toLowerCase(),
 									k.substring(key.length() + 1).replace(".", "_"));

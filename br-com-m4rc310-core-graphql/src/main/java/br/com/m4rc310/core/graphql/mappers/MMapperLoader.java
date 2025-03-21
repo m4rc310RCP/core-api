@@ -22,7 +22,7 @@ public class MMapperLoader {
 	
 	@Bean
 	ExtensionProvider<GeneratorConfiguration, TypeMapper> pageableInputField() {
-		return (config, defaults) -> {
+		return (_, defaults) -> {
 			
 			final ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);
 			provider.addIncludeFilter(new RegexPatternTypeFilter(Pattern.compile(".*")));
