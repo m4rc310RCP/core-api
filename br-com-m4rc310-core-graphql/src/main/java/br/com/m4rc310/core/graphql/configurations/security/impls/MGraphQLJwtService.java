@@ -271,8 +271,7 @@ public class MGraphQLJwtService implements IMGraphQLJwtService {
 	 */
 	@Override
 	public byte[] getKeyByte(String skey) throws Exception {
-		JWT_SIGNING_KEY = skey;
-		PBEKeySpec spec = new PBEKeySpec(JWT_SIGNING_KEY.toCharArray(), JWT_SALT.getBytes(), JWT_ITERATION, JWT_KEY_LENGTH);
+		PBEKeySpec spec = new PBEKeySpec(skey.toCharArray(), JWT_SALT.getBytes(), JWT_ITERATION, JWT_KEY_LENGTH);
 		SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
 		return factory.generateSecret(spec).getEncoded();
 	}
