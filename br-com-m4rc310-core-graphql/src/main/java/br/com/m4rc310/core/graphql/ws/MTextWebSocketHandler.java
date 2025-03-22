@@ -141,7 +141,7 @@ public class MTextWebSocketHandler extends TextWebSocketHandler {
 				context.setAuthentication(authentication);
 				SecurityContextHolder.setContext(context);
 			} catch (Exception e) {
-				log.error(e.getMessage());
+				e.printStackTrace();
 				SecurityContext context = SecurityContextHolder.createEmptyContext();
 				SecurityContextHolder.setContext(context);
 				fatalError(session, e);
@@ -162,7 +162,7 @@ public class MTextWebSocketHandler extends TextWebSocketHandler {
 					handleQueryOrMutation(mmessage.getId(), result, session);
 				}
 			} catch (Exception e) {
-				log.error(e.getMessage());
+				e.printStackTrace();
 				SecurityContext context = SecurityContextHolder.createEmptyContext();
 				SecurityContextHolder.setContext(context);
 				fatalError(session, e);
