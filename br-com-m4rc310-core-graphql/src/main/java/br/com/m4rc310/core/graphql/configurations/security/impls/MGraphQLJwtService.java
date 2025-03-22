@@ -1,7 +1,10 @@
 package br.com.m4rc310.core.graphql.configurations.security.impls;
 
+import java.time.Instant;
 import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 import javax.crypto.Cipher;
@@ -12,13 +15,16 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import br.com.m4rc310.core.graphql.configurations.security.IMAuthUserProvider;
 import br.com.m4rc310.core.graphql.configurations.security.IMGraphQLJwtService;
 import br.com.m4rc310.core.graphql.configurations.security.dtos.MEnumToken;
 import br.com.m4rc310.core.graphql.configurations.security.dtos.MUser;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,6 +55,11 @@ public class MGraphQLJwtService implements IMGraphQLJwtService {
 	/** The jwt key length. */
 	@Value(AUTH_SECURITY_KEY_LENGTH)
 	private int JWT_KEY_LENGTH;
+	
+	/** The jwt expiration. */
+	@Value(AUTH_SECURITY_EXPIRATION)
+	private Long JWT_SECURITY_EXPIRATION;
+	
 	
 	/**
 	 * <p>Constructor for .</p>
@@ -190,6 +201,36 @@ public class MGraphQLJwtService implements IMGraphQLJwtService {
 	public String decrypt(String text) throws Exception {
 		return decrypt(text, JWT_SIGNING_KEY);
 	}
+	
+	
+	/**
+	 * <p>
+	 * generateToken.
+	 * </p>
+	 *
+	 * @param user a {@link br.com.m4rc310.gql.dto.MUser} object
+	 * @return a {@link java.lang.String} object
+	 */
+	public String generateToken(MUser user) {
+		Map<String, Object> claim = new HashMap<>();
+		return createToken(claim, user);
+	}
+	
+	private String createToken(Map<String, Object> claims, UserDetails details) {
+		Date now = Date.from(Instant.now());
+		Date exp = new Date(now.getTime() + JWT_SECURITY_EXPIRATION);
+
+		JwtBuilder ret = Jwts.builder();
+		ret.setClaims(claims);
+		ret.setSubject(details.getUsername());
+		ret.claim(KEY_AUTH, details.getAuthorities());
+		ret.setIssuedAt(now);
+		ret.setExpiration(exp);
+		ret.signWith(SignatureAlgorithm.HS256, JWT_SIGNING_KEY);
+
+		return ret.compact();
+	}
+	
 	
 	/**
 	 * Extract username.
