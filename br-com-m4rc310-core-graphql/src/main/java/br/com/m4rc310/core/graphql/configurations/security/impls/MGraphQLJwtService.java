@@ -87,7 +87,6 @@ public class MGraphQLJwtService implements IMGraphQLJwtService {
 		}
 		String authorizationHeader = request.getHeader(AUTHORIZATION).replace(AUTHORIZATION, "");
 		return authorizationHeader.replace(type.getDescription(), "").trim();
-
 	}
 
 	/**
@@ -144,6 +143,8 @@ public class MGraphQLJwtService implements IMGraphQLJwtService {
 			}
 			username = extractUsername(token);
 			return provider.getUserFromUsername(username);
+		case AUTH:
+			return provider.authUser(token, this);
 		default:
 			return null;
 		}

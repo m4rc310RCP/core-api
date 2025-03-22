@@ -13,11 +13,13 @@ import lombok.Getter;
 public enum MEnumToken {
 	
 	/** The test. */
-	TEST("Test"), 
+ TEST("Test"), 
  /** The basic. */
  BASIC("Basic"), 
  /** The bearer. */
  BEARER("Bearer"), 
+ /** The bearer. */
+ AUTH("Auth"), 
  /** The none. */
  NONE("none");
 

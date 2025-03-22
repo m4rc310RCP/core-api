@@ -1,6 +1,7 @@
 package br.com.m4rc310.core.graphql.configurations.security;
 
 import br.com.m4rc310.core.graphql.configurations.security.dtos.MUser;
+import br.com.m4rc310.core.graphql.configurations.security.impls.MGraphQLJwtService;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -33,4 +34,13 @@ public interface IMAuthUserProvider {
 	 * @return true, if is valid user
 	 */
 	boolean isValidUser(MUser user);
+	
+	/**
+	 * Auth user.
+	 *
+	 * @param token of auth
+	 * @return the m user
+	 * @throws Exception the exception
+	 */
+	MUser authUser(String token, MGraphQLJwtService jwt) throws Exception;
 }
