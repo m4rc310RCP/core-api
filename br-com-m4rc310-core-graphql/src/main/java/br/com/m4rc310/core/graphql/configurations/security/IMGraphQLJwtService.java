@@ -3,6 +3,7 @@
  */
 package br.com.m4rc310.core.graphql.configurations.security;
 
+import java.util.Date;
 import java.util.function.Function;
 
 import br.com.m4rc310.core.graphql.configurations.security.dtos.MEnumToken;
@@ -62,6 +63,15 @@ public interface IMGraphQLJwtService extends IConsts {
 	 * @throws Exception the exception
 	 */
 	String decrypt(String text) throws Exception;
+	
+	/**
+	 * generateToken
+	 *
+	 * @param user
+	 * @return the token
+	 * @throws Exception the exception
+	 */
+	String generateToken(MUser user) throws Exception;
 
 	/**
 	 * Extract username.
@@ -70,6 +80,14 @@ public interface IMGraphQLJwtService extends IConsts {
 	 * @return the string
 	 */
 	String extractUsername(String token);
+
+	/**
+	 * Extract expiration.
+	 *
+	 * @param token the token
+	 * @return Date
+	 */
+	Date extractExpiration(String token);
 
 	/**
 	 * Extract claim.

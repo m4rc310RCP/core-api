@@ -211,7 +211,8 @@ public class MGraphQLJwtService implements IMGraphQLJwtService {
 	 * @param user a {@link br.com.m4rc310.gql.dto.MUser} object
 	 * @return a {@link java.lang.String} object
 	 */
-	public String generateToken(MUser user) {
+	@Override
+	public String generateToken(MUser user) throws Exception{
 		Map<String, Object> claim = new HashMap<>();
 		return createToken(claim, user);
 	}
@@ -244,6 +245,17 @@ public class MGraphQLJwtService implements IMGraphQLJwtService {
 	}
 
 	/**
+	 * Extract expiration.
+	 *
+	 * @param token the token
+	 * @return Date
+	 */
+	@Override
+	public Date extractExpiration(String token) {
+		return extractClaim(token, Claims::getExpiration);
+	}
+	
+	/**
 	 * Extract claim.
 	 *
 	 * @param <T> the generic type
@@ -272,7 +284,7 @@ public class MGraphQLJwtService implements IMGraphQLJwtService {
 			return false;
 		}
 	}
-
+	
 	/**
 	 * Decrypt.
 	 *
