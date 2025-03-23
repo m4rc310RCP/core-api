@@ -78,18 +78,20 @@ public class MAuthInterceptor implements ResolverInterceptor {
 
 			MAuth auth = context.getResolver().getExecutable().getDelegate().getAnnotation(MAuth.class);
 
+			String unauthorizadeMessage = auth == null ? "Access unauthorizade." : auth.message();
+			
 			if (Objects.isNull(auth) && isBasicToken) {
-				throw getWebException(401, "Access unauthorizade. User with basic privileges!");
+				throw getWebException(401, unauthorizadeMessage);
 			} else if (Objects.isNull(auth) && isAuthToken) {
-				throw getWebException(401, "Access unauthorizade. User with auth privileges!");
+				throw getWebException(401, unauthorizadeMessage);
 			} else if (Objects.nonNull(auth)) {
 				if (isBasicToken
 						&& !Arrays.asList(auth.roles()).stream().anyMatch(aa -> "basic".equalsIgnoreCase(aa))) {
-					throw getWebException(401, "Access unauthorizade. User with basic privileges!");
+					throw getWebException(401, unauthorizadeMessage);
 				}
 
 				if (isAuthToken && !Arrays.asList(auth.roles()).stream().anyMatch(aa -> "auth".equalsIgnoreCase(aa))) {
-					throw getWebException(401, "Access unauthorizade. User with auth privileges!");
+					throw getWebException(401, unauthorizadeMessage);
 				}
 
 				boolean isAuth = principal == null ? false : principal.getAuthorities().stream().anyMatch(ga -> {
@@ -102,7 +104,7 @@ public class MAuthInterceptor implements ResolverInterceptor {
 				});
 
 				if (!isAuth) {
-					throw getWebException(401, "Access unauthorizade.");
+					throw getWebException(401, unauthorizadeMessage);
 				}
 			}
 

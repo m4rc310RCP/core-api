@@ -15,4 +15,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MAuth {
 	String[] roles() default "";
+	String message() default "Access unauthorizade.";
 }
