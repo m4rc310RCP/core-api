@@ -65,14 +65,23 @@ public class MAuthInterceptor implements ResolverInterceptor {
 			MUserPrincipal principal = (MUserPrincipal) authentication.getPrincipal();
 			boolean isBasicToken = principal == null ? false
 					: principal.getAuthorities().stream().anyMatch(aa -> "basic".equalsIgnoreCase(aa.getAuthority()));
+			
+			boolean isAuthToken = principal == null ? false
+					: principal.getAuthorities().stream().anyMatch(aa -> "auth".equalsIgnoreCase(aa.getAuthority()));
 
 			MAuth auth = context.getResolver().getExecutable().getDelegate().getAnnotation(MAuth.class);
 			
 			if (Objects.isNull(auth) && isBasicToken) {
 				throw getWebException(401, "Access unauthorizade. User with basic privileges!");
+			}else if (Objects.isNull(auth) && isAuthToken) {
+				throw getWebException(401, "Access unauthorizade. User with auth privileges!");				
 			} else if (Objects.nonNull(auth)) {
 				if (isBasicToken && !Arrays.asList(auth.roles()).stream().anyMatch(aa -> "basic".equalsIgnoreCase(aa))) {
 					throw getWebException(401, "Access unauthorizade. User with basic privileges!");
+				}
+
+				if (isAuthToken && !Arrays.asList(auth.roles()).stream().anyMatch(aa -> "auth".equalsIgnoreCase(aa))) {
+					throw getWebException(401, "Access unauthorizade. User with auth privileges!");
 				}
 
 				boolean isAuth = principal == null ? false : principal.getAuthorities().stream().anyMatch(ga -> {
