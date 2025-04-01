@@ -33,6 +33,11 @@
 			<groupId>br.com.m4rc310</groupId>
 			<artifactId>br-com-m4rc310-core-weather</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>br.com.m4rc310</groupId>
+			<artifactId>br-com-m4rc310-core-mqtt</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>

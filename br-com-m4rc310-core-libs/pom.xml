@@ -82,6 +82,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.eclipse.paho</groupId>
+			<artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+			<version>1.2.5</version>
+		</dependency>
+
+		<dependency>
 			<groupId>io.leangen.graphql</groupId>
 			<artifactId>graphql-spqr-spring-boot-starter</artifactId>
 			<version>${spqr.version.spring.boot}</version>

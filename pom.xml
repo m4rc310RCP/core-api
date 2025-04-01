@@ -91,6 +91,12 @@
 				<artifactId>br-com-m4rc310-core-weather</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>br.com.m4rc310</groupId>
+				<artifactId>br-com-m4rc310-core-mqtt</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 			
 		</dependencies>
 	</dependencyManagement>
