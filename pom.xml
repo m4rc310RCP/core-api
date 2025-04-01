@@ -211,6 +211,7 @@
 		<module>br-com-m4rc310-core-graphql</module>
 		<module>br-com-m4rc310-core-weather</module>
 		<module>br-com-m4rc310-core-gtim</module>
+		<module>br-com-m4rc310-core-mqtt</module>
 	</modules>
 
 </project>
