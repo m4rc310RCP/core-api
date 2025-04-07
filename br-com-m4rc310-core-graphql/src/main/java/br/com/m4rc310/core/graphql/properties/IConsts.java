@@ -48,6 +48,9 @@ public interface IConsts {
 	/** The Constant VALUE_GRAPHQL_GUI_ENDPOINT. */
 	public static final String VALUE_GRAPHQL_GUI_ENDPOINT = "${graphql.spqr.gui.endpoint:/gui}";
 	
+	/** The Constant VALUE_GRAPHQL_GUI_ENDPOINT. */
+	public static final String VALUE_WEBHOOK_ENDPOINT = "${webhook.endpoint:/webhook}";
+	
 	/** The Constant VALUE_GRAPHQL_SERVER_ENDPOINT. */
 	public static final String VALUE_GRAPHQL_SERVER_ENDPOINT = "${graphql.spqr.http.endpoint:/graphql}";
 

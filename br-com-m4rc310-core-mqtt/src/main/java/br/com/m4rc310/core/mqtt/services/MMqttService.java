@@ -31,8 +31,10 @@ public class MMqttService implements IConst{
 	}
 	
 	public MqttClient getClient(String url) throws Exception{
-		if (client != null & client.isConnected()) {
-			return client;
+		if (client != null ) {
+			if (client.isConnected()) {
+				return client;				
+			}
 		}
 		
 		MqttConnectOptions options = new MqttConnectOptions();

@@ -39,6 +39,10 @@ public class MGraphQLSecurityConfig implements IConsts {
 	@Value(VALUE_GRAPHQL_SERVER_ENDPOINT)
 	private String SERVER_ENDPOINT;
 	
+	/** The server webhook. */
+	@Value(VALUE_WEBHOOK_ENDPOINT)
+	private String WEBHOOK_ENDPOINT;
+	
 	
 	/**
 	 * MGraphQLAutoConfiguration
@@ -99,6 +103,7 @@ public class MGraphQLSecurityConfig implements IConsts {
 		
 		String endpointGUI = String.format("%s/**", GUI_ENDPOINT);
 		String endpointGQL = String.format("%s/**", SERVER_ENDPOINT);
+		String endpointWHO = String.format("%s/**", WEBHOOK_ENDPOINT);
 		
 		
 		http = http.cors(AbstractHttpConfigurer::disable);
@@ -108,7 +113,8 @@ public class MGraphQLSecurityConfig implements IConsts {
 		http = http.securityContext(c -> c.requireExplicitSave(false));
 		http = http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 		http = http.authorizeHttpRequests(auth -> {
-			auth.requestMatchers(HttpMethod.GET, endpointGUI, endpointGQL).permitAll();
+			auth.requestMatchers(HttpMethod.GET, endpointGUI, endpointGQL, endpointWHO).permitAll();
+			auth.requestMatchers(HttpMethod.POST, endpointWHO).permitAll();
 			auth.requestMatchers(HttpMethod.POST, endpointGQL).authenticated();
 			auth.anyRequest().denyAll();
 		});
